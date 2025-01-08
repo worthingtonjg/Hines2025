@@ -48,11 +48,6 @@
             margin: 10px 0;
         }
 
-        .invitation .location {
-            font-style: italic;
-            color: #555;
-        }
-
         .invitation img {
             width: 100%;
             max-width: 500px;
@@ -72,37 +67,28 @@
             margin-bottom: 15px;
         }
 
-        .schedule p {
-            font-size: 1.2rem;
-            margin: 10px 0;
+        .schedule-section {
+            margin-bottom: 20px;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 10px 0; /* Adds spacing between schedule items */
+            padding-left: 20px; /* Adds indentation */
+        }
+
+        .schedule-item .time {
+            flex: 0 0 100px; /* Fixed width for the time column */
             font-weight: bold;
             color: #444;
         }
 
-        .schedule ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .schedule ul li {
-            padding: 8px 0;
+        .schedule-item .details {
+            flex: 1; /* Details take up the remaining space */
             font-size: 1rem;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .schedule ul li:last-child {
-            border-bottom: none;
-        }
-
-        .schedule a {
-            color: #8b0000;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .schedule a:hover {
-            text-decoration: underline;
+            color: #555;
         }
 
         .footer {
@@ -122,6 +108,10 @@
 
             .invitation h2 {
                 font-size: 1.5rem;
+            }
+
+            .schedule-item .time {
+                flex: 0 0 80px; /* Adjust time column width on smaller screens */
             }
         }
     </style>
@@ -143,22 +133,42 @@
     <div class="invitation">
         <div class="schedule">
             <h2>Event Schedule</h2>
-            <p><strong>January 20</strong></p>
-            <ul>
-                <li>6:30 PM - 7:30 PM: Check-In</li>
-                <li>7:30 PM: Dinner</li>
-                <li>8:30 PM: Murder Mystery Begins</li>
-            </ul>
-            <p><strong>January 21</strong></p>
-            <ul>
-                <li>7:00 AM - 9:00 AM: Continental Breakfast</li>
-                <li>11:00 AM: Checkout</li>
-            </ul>
+            
+            <!-- January 20 Schedule -->
+            <div class="schedule-section">
+                <p><strong>January 20</strong></p>
+                <div class="schedule-item">
+                    <div class="time">6:30 PM</div>
+                    <div class="details">Check-In</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time">7:30 PM</div>
+                    <div class="details">Dinner</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time">8:30 PM</div>
+                    <div class="details">Murder Mystery Begins</div>
+                </div>
+            </div>
+
+            <!-- January 21 Schedule -->
+            <div class="schedule-section">
+                <p><strong>January 21</strong></p>
+                <div class="schedule-item">
+                    <div class="time">7:00 AM</div>
+                    <div class="details">Continental Breakfast</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time">11:00 AM</div>
+                    <div class="details">Checkout</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Signup and RSVP Section -->
     <div class="invitation">
+        <h2>Additional Information:</h2>
         <p>Please bring a side dish to share. A link to the signup sheet is below:</p>
         <p><a href="<Insert Link>" target="_blank">Signup Sheet</a></p>
         <div class="footer">Please RSVP by January 10th</div>
