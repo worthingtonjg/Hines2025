@@ -13,9 +13,13 @@
             padding: 20px 0; /* Adds spacing at the top and bottom */
             display: flex;
             justify-content: center;
-            min-height: 100vh; /* Ensures body adapts to content height */
-            box-sizing: border-box; /* Ensures padding is included in the total height */
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 20px; /* Adds spacing between .invitation sections */
+            min-height: 100vh;
+            box-sizing: border-box;
         }
+
         .invitation {
             background-color: #fff;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -23,103 +27,107 @@
             width: 80%;
             max-width: 600px;
             padding: 20px;
+            margin: 0 auto; /* Centers the content */
             text-align: center;
         }
+
         .invitation h1 {
             font-size: 2.5rem;
             color: #8b0000;
             margin-bottom: 10px;
         }
+
         .invitation h2 {
             font-size: 1.8rem;
             color: #444;
             margin: 10px 0;
         }
+
         .invitation p {
             font-size: 1.2rem;
             margin: 10px 0;
         }
+
         .invitation .location {
             font-style: italic;
             color: #555;
         }
-        .invitation img {
-            width: 100%;        /* Makes the image scale to fit the container width */
-            max-width: 500px;   /* Prevents the image from becoming too large */
-            height: auto;       /* Maintains the aspect ratio */
-            border-radius: 10px; /* Adds rounded corners for an elegant look */
-            margin: 20px 0;     /* Adds spacing around the image */
-            object-fit: cover;  /* Ensures the image fits nicely if cropped */
-        }
+
         .invitation img {
             width: 100%;
             max-width: 500px;
             border-radius: 10px;
             margin: 20px 0;
+            object-fit: cover;
         }
-        .invitation .footer {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #777;
-        }
-        @media (max-width: 768px) {
-            .invitation {
-                padding: 15px;
-            }
-            .invitation h1 {
-                font-size: 2rem;
-            }
-            .invitation h2 {
-                font-size: 1.5rem;
-            }
-        }
+
         .schedule {
-            text-align: left; /* Aligns text to the left for readability */
+            text-align: left;
             margin-top: 20px;
         }
-        
+
         .schedule h2 {
             font-size: 1.5rem;
             color: #8b0000;
             margin-bottom: 15px;
         }
-        
+
         .schedule p {
             font-size: 1.2rem;
             margin: 10px 0;
             font-weight: bold;
             color: #444;
         }
-        
+
         .schedule ul {
-            list-style-type: none; /* Removes bullets */
+            list-style-type: none;
             padding: 0;
             margin: 0;
         }
-        
+
         .schedule ul li {
-            padding: 8px 0; /* Adds spacing between items */
+            padding: 8px 0;
             font-size: 1rem;
-            border-bottom: 1px solid #ddd; /* Adds a light divider line */
+            border-bottom: 1px solid #ddd;
         }
-        
+
         .schedule ul li:last-child {
-            border-bottom: none; /* Removes the divider from the last item */
+            border-bottom: none;
         }
-        
+
         .schedule a {
             color: #8b0000;
             text-decoration: none;
             font-weight: bold;
         }
-        
+
         .schedule a:hover {
-            text-decoration: underline; /* Adds a hover effect for the link */
+            text-decoration: underline;
         }
-                
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .invitation {
+                padding: 15px;
+            }
+
+            .invitation h1 {
+                font-size: 2rem;
+            }
+
+            .invitation h2 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Invitation Header -->
     <div class="invitation">
         <h1>You're Invited!</h1>
         <h2>Murder Mystery Dinner & Overnight Excursion</h2>
@@ -129,8 +137,9 @@
         <img src="hines.jpg" alt="The Hines Mansion">
         <p class="location">The Hines Mansion<br>383 West 100 South<br>Provo, Utah 84601</p>
         <p>We can't wait to see you there!</p>
-    </div
-    
+    </div>
+
+    <!-- Schedule Section -->
     <div class="invitation">
         <div class="schedule">
             <h2>Event Schedule</h2>
@@ -147,13 +156,12 @@
             </ul>
         </div>
     </div>
-    
+
+    <!-- Signup and RSVP Section -->
     <div class="invitation">
         <p>Please bring a side dish to share. A link to the signup sheet is below:</p>
         <p><a href="<Insert Link>" target="_blank">Signup Sheet</a></p>
- 
         <div class="footer">Please RSVP by January 10th</div>
     </div>
 </body>
 </html>
-
