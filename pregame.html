@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregame Information</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f9f5f0;
+            color: #333;
+            margin: 0;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+
+            background-image: url('background.png');
+            background-repeat: repeat;
+            background-size: auto;
+            background-position: top left;
+        }
+
+        .pregame {
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .pregame h1 {
+            font-size: 2rem;
+            color: #6A3F47;
+            margin-bottom: 10px;
+        }
+
+        .pregame h2 {
+            font-size: 1.5rem;
+            color: #AF6A59;
+            margin: 10px 0;
+        }
+
+        .pregame p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .pregame a {
+            color: #AF6A59;
+            text-decoration: underline;
+        }
+
+        .pregame a:hover {
+            color: #6A3F47;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .pregame {
+                padding: 15px;
+            }
+
+            .pregame h1 {
+                font-size: 1.8rem;
+            }
+
+            .pregame h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pregame">
+        <h1>Pregame Information</h1>
+
+        <section>
+            <h2>Hauntings</h2>
+            <p>The Hines Mansion is renowned for its eerie history and ghostly visitors. Guests have reported strange sounds, flickering lights, and other unexplained phenomena. Dive deeper into the mansion's haunted lore:</p>
+            <ul>
+                <li><a href="haunted.html">Learn about the Haunted History</a></li>
+                <li><a href="haunted_rooms.html">Explore the Haunted Rooms</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Obituary</h2>
+            <p>Nathan and Brin Hines, the last owners of the mansion, met a tragic and mysterious demise that left the community shaken. Learn more about their story and the questions surrounding their deaths:</p>
+            <a href="Hines_Obituary.html">Read the Full Obituary</a>
+        </section>
+
+        <section>
+            <h2>Inspector Noir's Letter</h2>
+            <p>You’ve been called to the mansion by Inspector Noir to uncover the truth about the Hines' untimely deaths. Every guest has a role to play in solving the mystery. Review Inspector Noir’s invitation and prepare for the evening:</p>
+            <a href="Inspector_Noir_Letter.html">Read the Full Letter</a>
+        </section>
+    </div>
+</body>
+</html>
