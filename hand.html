@@ -244,14 +244,13 @@
             }
         }
 
-        // Hide fullscreen card when overlay is clicked
         overlay.addEventListener('click', () => {
             const fullscreenCard = document.querySelector('.card.fullscreen');
             if (fullscreenCard) {
                 fullscreenCard.classList.remove('fullscreen');
             }
             overlay.classList.remove('active');
-            handDiv.style.display = 'flex';
+            Array.from(handDiv.children).forEach(c => (c.style.display = '')); // Show all cards again
             removeRemoveButton();
         });
 
