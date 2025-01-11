@@ -152,7 +152,7 @@
 
     <script>
         const data = {
-            weapons: ['Revolver', 'Knife', 'Wrench'],
+            weapons: ['Cheese','Revolver', 'Knife', 'Wrench'],
             suspects: ['Miss Scarlet', 'Colonel Mustard', 'Mrs. Peacock'],
             rooms: ['Library', 'Study', 'Kitchen']
         };
@@ -193,7 +193,7 @@
             card.className = 'card';
             card.dataset.name = name;
             card.innerHTML = `
-                <img src="images/${name.toLowerCase().replace(/ /g, '_')}.jpg" alt="${name}">
+                <img src="images/${name.toLowerCase().replace(/ /g, '_')}.png" alt="${name}">
                 <div class="card-label">${name}</div>
             `;
 
