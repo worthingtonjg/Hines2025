@@ -349,16 +349,16 @@
         });
 
         // Handle overlay click to deselect the card
-        overlay.addEventListener('click', () => {
-            const fullscreenCard = document.querySelector('.card.fullscreen');
-            if (fullscreenCard) {
-                fullscreenCard.classList.remove('fullscreen');
-                const image = fullscreenCard.querySelector('.card-image');
-                const qrCode = fullscreenCard.querySelector('.card-qr');
-                image.classList.remove('hidden');
-                qrCode.classList.add('hidden');
-                label.classList.remove('hidden');
-            }
+//        overlay.addEventListener('click', () => {
+//            const fullscreenCard = document.querySelector('.card.fullscreen');
+//            if (fullscreenCard) {
+//                fullscreenCard.classList.remove('fullscreen');
+//                const image = fullscreenCard.querySelector('.card-image');
+//                const qrCode = fullscreenCard.querySelector('.card-qr');
+//                image.classList.remove('hidden');
+//                qrCode.classList.add('hidden');
+//                label.classList.remove('hidden');
+//            }
             overlay.classList.remove('active');
             Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
         });
