@@ -121,10 +121,11 @@
         }
         
         .qr-image {
-            max-width: 100%; /* Ensure the QR code fits horizontally */
-            max-height: 100%; /* Ensure the QR code fits vertically */
-            object-fit: contain; /* Maintain aspect ratio */
-            margin: 0 auto; /* Center the QR code inside the container */
+            width: auto; /* Maintain the natural width */
+            height: auto; /* Maintain the natural height */
+            max-width: 90%; /* Ensure it fits within the container horizontally */
+            max-height: 90%; /* Ensure it fits within the container vertically */
+            object-fit: contain; /* Preserve aspect ratio */
         }
 
         .remove-button {
