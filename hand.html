@@ -208,20 +208,22 @@
         // Toggle fullscreen mode for a card
         function toggleFullscreen(card) {
             const isFullscreen = card.classList.contains('fullscreen');
-
+        
             if (isFullscreen) {
                 card.classList.remove('fullscreen');
                 overlay.classList.remove('active');
-                handDiv.style.display = 'flex';
+                handDiv.appendChild(card); // Move card back to hand
                 removeRemoveButton();
             } else {
                 Array.from(handDiv.children).forEach(c => c !== card && c.classList.remove('fullscreen'));
+                overlay.appendChild(card); // Move card to overlay
                 card.classList.add('fullscreen');
                 overlay.classList.add('active');
-                handDiv.style.display = 'none';
+                handDiv.style.display = 'none'; // Hide the hand
                 showRemoveButton(card);
             }
         }
+
 
         // Show remove button
         function showRemoveButton(card) {
