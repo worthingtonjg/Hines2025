@@ -107,6 +107,15 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
+        .card-qr {
+            width: auto; /* Maintain original width */
+            height: auto; /* Maintain original height */
+            max-width: 100%; /* Ensure it fits within the card */
+            max-height: 100%; /* Ensure it fits within the card */
+            display: block; /* Ensures proper rendering as a block element */
+            margin: 0 auto; /* Centers the QR code if smaller than the card */
+        }
+
         .remove-button {
             margin-top: 5px;
             padding: 5px 10px;
@@ -308,6 +317,10 @@
                 image.classList.add('hidden');
                 qrCode.classList.remove('hidden');
             } else {
+                // Reset the images
+                image.classList.remove('hidden');
+                qrCode.classList.add('hidden');
+                
                 // Exit fullscreen mode
                 card.classList.remove('fullscreen');
                 overlay.classList.remove('active');
