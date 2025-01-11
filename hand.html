@@ -113,7 +113,7 @@
             max-width: 100%; /* Ensure it fits within the card */
             max-height: 100%; /* Ensure it fits within the card */
             display: block; /* Ensures proper rendering as a block element */
-            margin: 10 auto; /* Centers the QR code if smaller than the card */
+            margin: 0 auto; /* Centers the QR code if smaller than the card */
         }
 
         .remove-button {
@@ -308,14 +308,11 @@
                         container.classList.add('hidden');
                     }
                 });
-        
-                // Ensure the card starts with the image visible
-                image.classList.remove('hidden');
-                qrCode.classList.add('hidden');
             } else if (!image.classList.contains('hidden')) {
                 // Toggle to QR code
                 image.classList.add('hidden');
                 qrCode.classList.remove('hidden');
+                label.style.visibility = 'hidden';
             } else {
                 // Reset the images
                 image.classList.remove('hidden');
@@ -324,6 +321,8 @@
                 // Exit fullscreen mode
                 card.classList.remove('fullscreen');
                 overlay.classList.remove('active');
+                label.style.visibility = 'visible';
+                
                 Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
             }
         }
@@ -349,6 +348,7 @@
                 const qrCode = fullscreenCard.querySelector('.card-qr');
                 image.classList.remove('hidden');
                 qrCode.classList.add('hidden');
+                label.style.visibility = 'visible';                
             }
             overlay.classList.remove('active');
             Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
