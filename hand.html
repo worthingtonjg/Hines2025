@@ -205,7 +205,10 @@
                 container => container.dataset.name === name
             );
             if (existingCard) {
-                toggleFullscreen(existingCard);
+                if(select)
+                {
+                    toggleFullscreen(existingCard);
+                }
                 return;
             }
         
