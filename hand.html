@@ -297,6 +297,7 @@
             const isFullscreen = card.classList.contains('fullscreen');
             const image = card.querySelector('.card-image');
             const qrCode = card.querySelector('.card-qr');
+            const label = card.querySelector('.card-label');
         
             if (!isFullscreen) {
                 // Enter fullscreen mode
@@ -311,7 +312,7 @@
                 // Toggle to QR code
                 image.classList.add('hidden');
                 qrCode.classList.remove('hidden');
-                label.style.visibility = 'hidden';
+                label.classList.add('hidden');
             } else {
                 // Reset the images
                 image.classList.remove('hidden');
@@ -320,7 +321,7 @@
                 // Exit fullscreen mode
                 card.classList.remove('fullscreen');
                 overlay.classList.remove('active');
-                label.style.visibility = 'visible';
+                label.classList.remove('hidden');
                 
                 Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
             }
@@ -347,7 +348,7 @@
                 const qrCode = fullscreenCard.querySelector('.card-qr');
                 image.classList.remove('hidden');
                 qrCode.classList.add('hidden');
-                label.style.visibility = 'visible';                
+                label.classList.remove('hidden');
             }
             overlay.classList.remove('active');
             Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
