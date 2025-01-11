@@ -173,20 +173,30 @@
             localStorage.setItem('playerHand', JSON.stringify(cards));
         }
 
-        function addCardToHand(name) {
+        function addCardToHand(name, select = false) {
+            if (!name) return; // Exit if name is invalid
+        
+            // Check if the card already exists in the hand
+            const existingCard = Array.from(handDiv.children).find(
+                container => container.dataset.name === name
+            );
+            if (existingCard) {
+                return;
+            }
+        
             const cardContainer = document.createElement('div');
             cardContainer.className = 'card-container';
             cardContainer.dataset.name = name;
-
+        
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
                 <img src="cards/${name.toLowerCase().replace(/ /g, '_')}.png" alt="${name}">
                 <div class="card-label">${name}</div>
             `;
-
+        
             card.addEventListener('click', () => toggleFullscreen(card));
-
+        
             const removeButton = document.createElement('button');
             removeButton.className = 'remove-button';
             removeButton.textContent = 'Remove Card';
@@ -194,12 +204,18 @@
                 cardContainer.remove();
                 saveHand();
             });
-
+        
             cardContainer.appendChild(card);
             cardContainer.appendChild(removeButton);
             handDiv.appendChild(cardContainer);
+        
+            if (select) {
+                toggleFullscreen(card);
+            }
+        
             saveHand();
         }
+
 
         function toggleFullscreen(card) {
             const isFullscreen = card.classList.contains('fullscreen');
@@ -212,11 +228,30 @@
             }
         }
 
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
         categorySelect.addEventListener('change', updateItems);
 
         addCardButton.addEventListener('click', () => {
             const selectedItem = itemsSelect.value;
             addCardToHand(selectedItem);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Load saved cards
+            loadHand();
+        
+            // Get the card name from the query parameter
+            const cardName = getQueryParam('card');
+            if (cardName) {
+                addCardToHand(cardName, true); // Add and select the card
+            }
+        
+            // Initialize dropdown items
+            updateItems();
         });
 
         updateItems();
