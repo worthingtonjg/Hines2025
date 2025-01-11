@@ -199,6 +199,19 @@
 
         function addCardToHand(name, select = false) {
             if (!name) return; // Exit if name is invalid
+
+            // Find the card name in the data (case-insensitive)
+            const validName = Object.values(data)
+                .flat() // Combine all categories into one array
+                .find(item => item.toLowerCase() === name.toLowerCase());
+        
+            if (!validName) {
+                alert(`Invalid card name: "${name}".`);
+                return; // Exit if the name is not valid
+            }
+        
+            // Set the name to the exact match from the data
+            name = validName;            
         
             // Check if the card already exists in the hand
             const existingCard = Array.from(handDiv.children).find(
