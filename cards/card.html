@@ -24,7 +24,7 @@
 
         .controls {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 10px;
             text-align: center;
         }
@@ -114,6 +114,21 @@
         .overlay.active {
             display: block;
         }
+
+        .remove-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background-color: #c9302c;
+        }
     </style>
 </head>
 <body>
@@ -200,11 +215,36 @@
                 card.classList.remove('fullscreen');
                 overlay.classList.remove('active');
                 handDiv.style.display = 'flex';
+                removeRemoveButton();
             } else {
                 Array.from(handDiv.children).forEach(c => c !== card && c.classList.remove('fullscreen'));
                 card.classList.add('fullscreen');
                 overlay.classList.add('active');
                 handDiv.style.display = 'none';
+                showRemoveButton(card);
+            }
+        }
+
+        // Show remove button
+        function showRemoveButton(card) {
+            const removeButton = document.createElement('button');
+            removeButton.className = 'remove-button';
+            removeButton.textContent = 'Remove Card';
+            removeButton.addEventListener('click', () => {
+                card.remove();
+                saveHand();
+                overlay.classList.remove('active');
+                handDiv.style.display = 'flex';
+                removeRemoveButton();
+            });
+            document.body.appendChild(removeButton);
+        }
+
+        // Remove the remove button
+        function removeRemoveButton() {
+            const removeButton = document.querySelector('.remove-button');
+            if (removeButton) {
+                removeButton.remove();
             }
         }
 
@@ -216,6 +256,7 @@
             }
             overlay.classList.remove('active');
             handDiv.style.display = 'flex';
+            removeRemoveButton();
         });
 
         // Event listeners
