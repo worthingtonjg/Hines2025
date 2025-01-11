@@ -220,7 +220,8 @@
             if (existingCard) {
                 if(select)
                 {
-                    toggleFullscreen(existingCard);
+                    const cardElement = existingCard.querySelector('.card');
+                    toggleFullscreen(cardElement);
                 }
                 return;
             }
