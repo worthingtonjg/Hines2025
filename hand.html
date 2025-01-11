@@ -24,7 +24,7 @@
 
         .controls {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 10px;
             text-align: center;
         }
@@ -70,6 +70,7 @@
             align-items: flex-end;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, z-index 0.3s;
         }
 
         .card img {
@@ -89,11 +90,48 @@
             font-size: 0.9rem;
             font-weight: bold;
         }
+
+        .card.fullscreen {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(2);
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .remove-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background-color: #c9302c;
+        }
     </style>
 </head>
 <body>
-    <h1>Player Hand</h1>
-
     <div class="controls">
         <select id="category">
             <option value="weapons">Weapons</option>
@@ -110,6 +148,8 @@
 
     <div class="hand" id="hand"></div>
 
+    <div class="overlay" id="overlay"></div>
+
     <script>
         const data = {
             weapons: ['Revolver', 'Knife', 'Wrench'],
@@ -121,6 +161,7 @@
         const itemsSelect = document.getElementById('items');
         const handDiv = document.getElementById('hand');
         const addCardButton = document.getElementById('add-card');
+        const overlay = document.getElementById('overlay');
 
         // Initialize items dropdown
         function updateItems() {
@@ -157,12 +198,64 @@
             `;
 
             card.addEventListener('click', () => {
-                alert(`Showing card: ${name}`);
+                toggleFullscreen(card);
             });
 
             handDiv.appendChild(card);
             saveHand();
         }
+
+        // Toggle fullscreen mode for a card
+        function toggleFullscreen(card) {
+            const isFullscreen = card.classList.contains('fullscreen');
+
+            if (isFullscreen) {
+                card.classList.remove('fullscreen');
+                overlay.classList.remove('active');
+                handDiv.style.display = 'flex';
+                removeRemoveButton();
+            } else {
+                Array.from(handDiv.children).forEach(c => c !== card && c.classList.remove('fullscreen'));
+                card.classList.add('fullscreen');
+                overlay.classList.add('active');
+                handDiv.style.display = 'none';
+                showRemoveButton(card);
+            }
+        }
+
+        // Show remove button
+        function showRemoveButton(card) {
+            const removeButton = document.createElement('button');
+            removeButton.className = 'remove-button';
+            removeButton.textContent = 'Remove Card';
+            removeButton.addEventListener('click', () => {
+                card.remove();
+                saveHand();
+                overlay.classList.remove('active');
+                handDiv.style.display = 'flex';
+                removeRemoveButton();
+            });
+            document.body.appendChild(removeButton);
+        }
+
+        // Remove the remove button
+        function removeRemoveButton() {
+            const removeButton = document.querySelector('.remove-button');
+            if (removeButton) {
+                removeButton.remove();
+            }
+        }
+
+        // Hide fullscreen card when overlay is clicked
+        overlay.addEventListener('click', () => {
+            const fullscreenCard = document.querySelector('.card.fullscreen');
+            if (fullscreenCard) {
+                fullscreenCard.classList.remove('fullscreen');
+            }
+            overlay.classList.remove('active');
+            handDiv.style.display = 'flex';
+            removeRemoveButton();
+        });
 
         // Event listeners
         categorySelect.addEventListener('change', updateItems);
