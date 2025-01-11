@@ -287,23 +287,10 @@
         
         function toggleFullscreen(card) {
             const isFullscreen = card.classList.contains('fullscreen');
+            const image = card.querySelector('.card-image');
+            const qrCode = card.querySelector('.card-qr');
         
-            if (isFullscreen) {
-                // Exit fullscreen mode
-                card.classList.remove('fullscreen');
-                overlay.classList.remove('active');
-                Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
-        
-                // Reset to show the card image when exiting fullscreen
-                const image = card.querySelector('.card-image');
-                const qrCode = card.querySelector('.card-qr');
-                if (image && qrCode) {
-                    image.classList.remove('hidden');
-                    qrCode.classList.add('hidden');
-                }
-        
-                card.removeEventListener('click', toggleCardContent);
-            } else {
+            if (!isFullscreen) {
                 // Enter fullscreen mode
                 card.classList.add('fullscreen');
                 overlay.classList.add('active');
@@ -313,25 +300,22 @@
                     }
                 });
         
-                // Add click listener to toggle content (image/QR code)
-                card.addEventListener('click', toggleCardContent);
-            }
-        }
+                // Ensure the card starts with the image visible
+                image.classList.remove('hidden');
+                qrCode.classList.add('hidden');
+            } else if (!image.classList.contains('hidden')) {
+                // Toggle to QR code
+                image.classList.add('hidden');
+                qrCode.classList.remove('hidden');
+            } else {
+                // Exit fullscreen mode
+                card.classList.remove('fullscreen');
+                overlay.classList.remove('active');
+                Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
         
-        function toggleCardContent(event) {
-            const card = event.currentTarget; // The card itself
-            const image = card.querySelector('.card-image');
-            const qrCode = card.querySelector('.card-qr');
-        
-            if (image && qrCode) {
-                if (!image.classList.contains('hidden')) {
-                    // Show QR code and hide the image
-                    image.classList.add('hidden');
-                    qrCode.classList.remove('hidden');
-                } else {
-                    // Exit fullscreen mode on second click
-                    toggleFullscreen(card);
-                }
+                // Reset to show the card image when exiting fullscreen
+                image.classList.remove('hidden');
+                qrCode.classList.add('hidden');
             }
         }
 
