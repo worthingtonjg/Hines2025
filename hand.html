@@ -114,12 +114,17 @@
             background-color: white; /* White background for the QR code */
             width: 100%; /* Make the container fill the card's width */
             height: 100%; /* Make the container fill the card's height */
+            box-sizing: border-box; /* Include padding and border in the width/height calculation */
+            padding: 10px; /* Add padding to prevent the QR code from touching the edges */
+            overflow: hidden; /* Prevent any overflow issues */
+            border-radius: 10px; /* Optional: Add rounded corners to match the card style */
         }
         
         .qr-image {
-            max-width: 80%; /* Ensure the QR code scales appropriately */
-            max-height: 80%; /* Ensure it fits within the container */
+            max-width: 100%; /* Ensure the QR code fits horizontally */
+            max-height: 100%; /* Ensure the QR code fits vertically */
             object-fit: contain; /* Maintain aspect ratio */
+            margin: 0 auto; /* Center the QR code inside the container */
         }
 
         .remove-button {
