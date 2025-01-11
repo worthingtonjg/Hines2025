@@ -148,6 +148,24 @@
         .hidden {
             display: none;
         }
+
+        .toggle-qr {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it appears above the card */
+        }
+        
+        .toggle-qr:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
@@ -238,6 +256,7 @@
             card.innerHTML = `
                 <img class="card-image" src="cards/${name.toLowerCase().replace(/ /g, '')}.jpg" alt="${name}">
                 <img class="card-qr hidden" src="qr-codes/${name.toLowerCase().replace(/ /g, '_')}_qr.png" alt="${name} QR Code">
+                <button class="toggle-qr">Toggle QR</button>
                 <div class="card-label">${name}</div>
             `;
         
@@ -285,18 +304,21 @@
                     }
                 });
 
-                // Add a click listener to toggle between card image and QR code
-                card.addEventListener('click', toggleCardContent);
+                 // Ensure toggle button is functional
+                const toggleButton = card.querySelector('.toggle-qr');
+                toggleButton.addEventListener('click', toggleCardContent);
             }
 
-            // Remove the toggle listener when exiting fullscreen
+            // Remove toggle listener when exiting fullscreen
             if (!isFullscreen) {
-                card.removeEventListener('click', toggleCardContent);
+                const toggleButton = card.querySelector('.toggle-qr');
+                toggleButton.removeEventListener('click', toggleCardContent);
             }
         }
 
         function toggleCardContent(event) {
-            const card = event.currentTarget;
+            event.stopPropagation(); // Prevent the click from triggering fullscreen toggle
+            const card = event.currentTarget.closest('.card'); // Get the card element
             const image = card.querySelector('.card-image');
             const qrCode = card.querySelector('.card-qr');
         
