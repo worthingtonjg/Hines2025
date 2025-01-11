@@ -108,11 +108,18 @@
         }
 
         .card-qr {
-            width: auto; /* Maintain original width */
-            height: auto; /* Maintain original height */
-            max-width: 80%; /* Ensure it fits within the card */
-            display: block; /* Ensures proper rendering as a block element */
-            margin: 0 auto; /* Centers the QR code if smaller than the card */
+            display: flex;
+            align-items: center; /* Vertically center the QR code */
+            justify-content: center; /* Horizontally center the QR code */
+            background-color: white; /* White background for the QR code */
+            width: 100%; /* Make the container fill the card's width */
+            height: 100%; /* Make the container fill the card's height */
+        }
+        
+        .qr-image {
+            max-width: 80%; /* Ensure the QR code scales appropriately */
+            max-height: 80%; /* Ensure it fits within the container */
+            object-fit: contain; /* Maintain aspect ratio */
         }
 
         .remove-button {
@@ -263,7 +270,9 @@
             card.className = 'card';
             card.innerHTML = `
                 <img class="card-image" src="cards/${name.toLowerCase().replace(/ /g, '')}.jpg" alt="${name}">
-                <img class="card-qr hidden" src="codes/${name.toLowerCase().replace(/ /g, '')}.png" alt="${name} QR Code">
+                <div class="card-qr hidden">
+                    <img class="qr-image" src="codes/${name.toLowerCase().replace(/ /g, '')}.png" alt="${name} QR Code">
+                </div>
                 <div class="card-label">${name}</div>
             `;
         
