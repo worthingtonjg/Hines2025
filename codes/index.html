@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code List</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f9f5f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            min-height: 100vh;
+            background-image: url('background.png');
+            background-repeat: repeat;
+            background-size: auto;
+            background-position: top left;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #6A3F47;
+        }
+
+        .qr-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 3px solid #6A3F47;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .qr-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #AF6A59;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .qr-item img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .qr-item .label {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #6A3F47;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Codes</h1>
+    <div class="qr-list" id="qr-list"></div>
+
+    <script>
+        const data = {
+            weapons: ['Cheese', 'Revolver', 'Knife', 'Wrench'],
+            suspects: ['Miss Scarlet', 'Colonel Mustard', 'Mrs. Peacock'],
+            rooms: ['Library', 'Study', 'Kitchen']
+        };
+
+        const qrList = document.getElementById('qr-list');
+
+        // Generate QR codes for each category
+        for (const [category, items] of Object.entries(data)) {
+            items.forEach(item => {
+                const qrItem = document.createElement('div');
+                qrItem.className = 'qr-item';
+
+                qrItem.innerHTML = `
+                    <img src="codes/${item.toLowerCase().replace(/ /g, '')}.png" alt="${item} QR Code">
+                    <div class="label">${item}</div>
+                `;
+
+                qrList.appendChild(qrItem);
+            });
+        }
+    </script>
+</body>
+</html>
 
