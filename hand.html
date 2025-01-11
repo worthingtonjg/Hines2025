@@ -303,21 +303,27 @@
                         container.classList.add('hidden');
                     }
                 });
-
-                 // Ensure toggle button is functional
+        
+                // Add click listener to the toggle button
                 const toggleButton = card.querySelector('.toggle-qr');
-                toggleButton.addEventListener('click', toggleCardContent);
+                if (toggleButton) {
+                    toggleButton.addEventListener('click', toggleCardContent);
+                }
             }
-
+        
             // Remove toggle listener when exiting fullscreen
             if (!isFullscreen) {
                 const toggleButton = card.querySelector('.toggle-qr');
-                toggleButton.removeEventListener('click', toggleCardContent);
+                if (toggleButton) {
+                    toggleButton.removeEventListener('click', toggleCardContent);
+                }
             }
         }
 
+
         function toggleCardContent(event) {
-            event.stopPropagation(); // Prevent the click from triggering fullscreen toggle
+            event.stopPropagation(); // Prevent the click from propagating to the card or overlay
+        
             const card = event.currentTarget.closest('.card'); // Get the card element
             const image = card.querySelector('.card-image');
             const qrCode = card.querySelector('.card-qr');
@@ -326,7 +332,8 @@
                 image.classList.toggle('hidden');
                 qrCode.classList.toggle('hidden');
             }
-        }        
+        }
+     
 
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
