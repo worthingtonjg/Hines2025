@@ -350,8 +350,7 @@
         categorySelect.addEventListener('change', updateItems);
 
         addCardButton.addEventListener('click', () => {
-            const selectedItem = itemsSelect.value;
-            addCardToHand(selectedItem);
+            window.location.href = 'cardadd';
         });
 
         // Handle overlay click to deselect the card
