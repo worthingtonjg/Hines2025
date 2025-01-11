@@ -110,9 +110,14 @@
 
             if (qrCode) {
                 console.log("QR Code Data:", qrCode.data);
-                statusDiv.textContent = `QR Code Detected: ${qrCode.data}`;
-                alert(`QR Code Content: ${qrCode.data}`);
-                stopVideo(); // Stop the video stream when a QR code is detected
+                stopVideo(); // Stop the video stream
+        
+                // Navigate to the URL embedded in the QR code
+                if (isValidUrl(qrCode.data)) {
+                    window.location.href = qrCode.data;
+                } else {
+                    alert(`Scanned data is not a valid URL: ${qrCode.data}`);
+                }
             } else {
                 statusDiv.textContent = "Scanning for QR codes...";
                 requestAnimationFrame(scanQRCode); // Continue scanning
