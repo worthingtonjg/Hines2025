@@ -217,14 +217,27 @@
         }
 
 
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        document.body.appendChild(overlay);
+        
         function toggleFullscreen(card) {
             const isFullscreen = card.classList.contains('fullscreen');
-
+        
             if (isFullscreen) {
+                // Deselect card
                 card.classList.remove('fullscreen');
+                overlay.classList.remove('active');
+                Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
             } else {
-                document.querySelectorAll('.card').forEach(c => c.classList.remove('fullscreen'));
+                // Select card
                 card.classList.add('fullscreen');
+                overlay.classList.add('active');
+                Array.from(handDiv.children).forEach(container => {
+                    if (!container.contains(card)) {
+                        container.classList.add('hidden');
+                    }
+                });
             }
         }
 
@@ -240,6 +253,16 @@
             addCardToHand(selectedItem);
         });
 
+        // Handle overlay click to deselect the card
+        overlay.addEventListener('click', () => {
+            const fullscreenCard = document.querySelector('.card.fullscreen');
+            if (fullscreenCard) {
+                fullscreenCard.classList.remove('fullscreen');
+            }
+            overlay.classList.remove('active');
+            Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
+        });
+        
         window.addEventListener('DOMContentLoaded', () => {
             // Load saved cards
             loadHand();
