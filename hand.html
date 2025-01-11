@@ -293,6 +293,16 @@
                 card.classList.remove('fullscreen');
                 overlay.classList.remove('active');
                 Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
+        
+                // Reset to show the card image when exiting fullscreen
+                const image = card.querySelector('.card-image');
+                const qrCode = card.querySelector('.card-qr');
+                if (image && qrCode) {
+                    image.classList.remove('hidden');
+                    qrCode.classList.add('hidden');
+                }
+        
+                card.removeEventListener('click', toggleCardContent);
             } else {
                 // Enter fullscreen mode
                 card.classList.add('fullscreen');
@@ -303,18 +313,11 @@
                     }
                 });
         
-                // Add click listener to toggle content (image/QR)
+                // Add click listener to toggle content (image/QR code)
                 card.addEventListener('click', toggleCardContent);
             }
-        
-            // Remove toggle listener when exiting fullscreen
-            if (!isFullscreen) {
-                card.removeEventListener('click', toggleCardContent);
-            }
         }
-
-
-
+        
         function toggleCardContent(event) {
             const card = event.currentTarget; // The card itself
             const image = card.querySelector('.card-image');
@@ -331,8 +334,6 @@
                 }
             }
         }
-
-     
 
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
