@@ -115,20 +115,28 @@
             display: block;
         }
 
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
         .remove-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 1rem;
+            margin-top: 5px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
             background-color: #d9534f;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
-
+        
         .remove-button:hover {
             background-color: #c9302c;
         }
+
     </style>
 </head>
 <body>
@@ -187,8 +195,10 @@
             localStorage.setItem('playerHand', JSON.stringify(cards));
         }
 
-        // Add a card to the hand
         function addCardToHand(name) {
+            const cardContainer = document.createElement('div');
+            cardContainer.className = 'card-container';
+        
             const card = document.createElement('div');
             card.className = 'card';
             card.dataset.name = name;
@@ -196,12 +206,18 @@
                 <img src="cards/${name.toLowerCase().replace(/ /g, '_')}.png" alt="${name}">
                 <div class="card-label">${name}</div>
             `;
-
-            card.addEventListener('click', () => {
-                toggleFullscreen(card);
+        
+            const removeButton = document.createElement('button');
+            removeButton.className = 'remove-button';
+            removeButton.textContent = 'Remove Card';
+            removeButton.addEventListener('click', () => {
+                cardContainer.remove();
+                saveHand();
             });
-
-            handDiv.appendChild(card);
+        
+            cardContainer.appendChild(card);
+            cardContainer.appendChild(removeButton);
+            handDiv.appendChild(cardContainer);
             saveHand();
         }
 
