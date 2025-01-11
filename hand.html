@@ -256,7 +256,6 @@
             card.innerHTML = `
                 <img class="card-image" src="cards/${name.toLowerCase().replace(/ /g, '')}.jpg" alt="${name}">
                 <img class="card-qr hidden" src="qr-codes/${name.toLowerCase().replace(/ /g, '_')}_qr.png" alt="${name} QR Code">
-                <button class="toggle-qr">Toggle QR</button>
                 <div class="card-label">${name}</div>
             `;
         
@@ -290,12 +289,12 @@
             const isFullscreen = card.classList.contains('fullscreen');
         
             if (isFullscreen) {
-                // Deselect card
+                // Exit fullscreen mode
                 card.classList.remove('fullscreen');
                 overlay.classList.remove('active');
                 Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
             } else {
-                // Select card
+                // Enter fullscreen mode
                 card.classList.add('fullscreen');
                 overlay.classList.add('active');
                 Array.from(handDiv.children).forEach(container => {
@@ -304,35 +303,35 @@
                     }
                 });
         
-                // Add click listener to the toggle button
-                const toggleButton = card.querySelector('.toggle-qr');
-                if (toggleButton) {
-                    toggleButton.addEventListener('click', toggleCardContent);
-                }
+                // Add click listener to toggle content (image/QR)
+                card.addEventListener('click', toggleCardContent);
             }
         
             // Remove toggle listener when exiting fullscreen
             if (!isFullscreen) {
-                const toggleButton = card.querySelector('.toggle-qr');
-                if (toggleButton) {
-                    toggleButton.removeEventListener('click', toggleCardContent);
-                }
+                card.removeEventListener('click', toggleCardContent);
             }
         }
 
 
+
         function toggleCardContent(event) {
-            event.stopPropagation(); // Prevent the click from propagating to the card or overlay
-        
-            const card = event.currentTarget.closest('.card'); // Get the card element
+            const card = event.currentTarget; // The card itself
             const image = card.querySelector('.card-image');
             const qrCode = card.querySelector('.card-qr');
         
             if (image && qrCode) {
-                image.classList.toggle('hidden');
-                qrCode.classList.toggle('hidden');
+                if (!image.classList.contains('hidden')) {
+                    // Show QR code and hide the image
+                    image.classList.add('hidden');
+                    qrCode.classList.remove('hidden');
+                } else {
+                    // Exit fullscreen mode on second click
+                    toggleFullscreen(card);
+                }
             }
         }
+
      
 
         function getQueryParam(param) {
