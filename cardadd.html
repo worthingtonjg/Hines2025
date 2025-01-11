@@ -47,7 +47,24 @@
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 </head>
 <body>
-    <h1>QR Code Scanner</h1>
+    <a href="hand" style="
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px;
+        font-family: 'Georgia', serif;
+        font-size: 1rem;
+        color: #fff;
+        background-color: #6A3F47;
+        border-radius: 5px;
+        text-decoration: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#AF6A59'"
+       onmouseout="this.style.backgroundColor='#6A3F47'">
+       ← Back to Previous Page
+    </a>
+    
+    <h1>Add Card</h1>
     <video id="qr-video" autoplay></video>
     <div id="status">Point your camera at a QR code</div>
     <button id="stop-button" style="display: none;">Stop Scanning</button>
