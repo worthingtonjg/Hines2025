@@ -58,6 +58,13 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
         .card {
             position: relative;
             width: 150px;
@@ -100,28 +107,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        .card-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        
         .remove-button {
             margin-top: 5px;
             padding: 5px 10px;
@@ -132,11 +117,10 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         .remove-button:hover {
             background-color: #c9302c;
         }
-
     </style>
 </head>
 <body>
@@ -156,11 +140,9 @@
 
     <div class="hand" id="hand"></div>
 
-    <div class="overlay" id="overlay"></div>
-
     <script>
         const data = {
-            weapons: ['Cheese','Revolver', 'Knife', 'Wrench'],
+            weapons: ['Cheese', 'Revolver', 'Knife', 'Wrench'],
             suspects: ['Miss Scarlet', 'Colonel Mustard', 'Mrs. Peacock'],
             rooms: ['Library', 'Study', 'Kitchen']
         };
@@ -169,9 +151,7 @@
         const itemsSelect = document.getElementById('items');
         const handDiv = document.getElementById('hand');
         const addCardButton = document.getElementById('add-card');
-        const overlay = document.getElementById('overlay');
 
-        // Initialize items dropdown
         function updateItems() {
             const category = categorySelect.value;
             itemsSelect.innerHTML = '';
@@ -183,30 +163,30 @@
             });
         }
 
-        // Load hand from localStorage
         function loadHand() {
             const storedHand = JSON.parse(localStorage.getItem('playerHand')) || [];
             storedHand.forEach(item => addCardToHand(item));
         }
 
-        // Save hand to localStorage
         function saveHand() {
-            const cards = Array.from(handDiv.children).map(card => card.dataset.name);
+            const cards = Array.from(handDiv.children).map(container => container.dataset.name);
             localStorage.setItem('playerHand', JSON.stringify(cards));
         }
 
         function addCardToHand(name) {
             const cardContainer = document.createElement('div');
             cardContainer.className = 'card-container';
-        
+            cardContainer.dataset.name = name;
+
             const card = document.createElement('div');
             card.className = 'card';
-            card.dataset.name = name;
             card.innerHTML = `
                 <img src="cards/${name.toLowerCase().replace(/ /g, '_')}.png" alt="${name}">
                 <div class="card-label">${name}</div>
             `;
-        
+
+            card.addEventListener('click', () => toggleFullscreen(card));
+
             const removeButton = document.createElement('button');
             removeButton.className = 'remove-button';
             removeButton.textContent = 'Remove Card';
@@ -214,7 +194,7 @@
                 cardContainer.remove();
                 saveHand();
             });
-        
+
             cardContainer.appendChild(card);
             cardContainer.appendChild(removeButton);
             handDiv.appendChild(cardContainer);
@@ -223,54 +203,15 @@
 
         function toggleFullscreen(card) {
             const isFullscreen = card.classList.contains('fullscreen');
-        
+
             if (isFullscreen) {
                 card.classList.remove('fullscreen');
-                overlay.classList.remove('active');
-                Array.from(handDiv.children).forEach(c => (c.style.display = '')); // Restore visibility of all cards
-                removeRemoveButton();
             } else {
-                Array.from(handDiv.children).forEach(c => (c.style.display = c === card ? '' : 'none')); // Show only selected card
+                document.querySelectorAll('.card').forEach(c => c.classList.remove('fullscreen'));
                 card.classList.add('fullscreen');
-                overlay.classList.add('active');
-                showRemoveButton(card);
             }
         }
 
-        // Show remove button
-        function showRemoveButton(card) {
-            const removeButton = document.createElement('button');
-            removeButton.className = 'remove-button';
-            removeButton.textContent = 'Remove Card';
-            removeButton.addEventListener('click', () => {
-                card.remove();
-                saveHand();
-                overlay.classList.remove('active');
-                handDiv.style.display = 'flex';
-                removeRemoveButton();
-            });
-            document.body.appendChild(removeButton);
-        }
-
-        // Remove the remove button
-        function removeRemoveButton() {
-            const removeButton = document.querySelector('.remove-button');
-            if (removeButton) {
-                removeButton.remove();
-            }
-        }
-
-        overlay.addEventListener('click', () => {
-            const fullscreenCard = document.querySelector('.card.fullscreen');
-            if (fullscreenCard) {
-                fullscreenCard.classList.remove('fullscreen');
-            }
-            overlay.classList.remove('active');
-            Array.from(handDiv.children).forEach(c => (c.style.display = '')); // Show all cards again
-            removeRemoveButton();
-        });
-
-        // Event listeners
         categorySelect.addEventListener('change', updateItems);
 
         addCardButton.addEventListener('click', () => {
@@ -278,7 +219,6 @@
             addCardToHand(selectedItem);
         });
 
-        // Initial setup
         updateItems();
         loadHand();
     </script>
