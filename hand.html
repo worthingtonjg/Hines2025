@@ -211,7 +211,7 @@
             if (isFullscreen) {
                 card.classList.remove('fullscreen');
                 overlay.classList.remove('active');
-                Array.from(handDiv.children).forEach(c => (c.style.display = '')); // Show all cards
+                Array.from(handDiv.children).forEach(c => (c.style.display = '')); // Restore visibility of all cards
                 removeRemoveButton();
             } else {
                 Array.from(handDiv.children).forEach(c => (c.style.display = c === card ? '' : 'none')); // Show only selected card
@@ -220,7 +220,6 @@
                 showRemoveButton(card);
             }
         }
-
 
         // Show remove button
         function showRemoveButton(card) {
