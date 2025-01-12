@@ -214,7 +214,7 @@
         function checkHandEmpty() {
             // Check if there are any actual card containers (excluding the empty-hand message)
             const hasCards = Array.from(handDiv.children).some(
-                child => child.classList.contains('card-container') // Only consider card containers
+                child => child.classList.contains('card-container') || child.classList.contains('card-container hidden')
             );
 
             if (!hasCards) {
