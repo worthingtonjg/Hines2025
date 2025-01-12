@@ -289,12 +289,12 @@
             cardContainer.appendChild(card);
             cardContainer.appendChild(removeButton);
             handDiv.appendChild(cardContainer);
-        
+
+            saveHand();
+
             if (select === true) {
                 toggleFullscreen(card, select);
             }
-        
-            saveHand();
         }
 
 
