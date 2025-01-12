@@ -6,14 +6,15 @@
     <title>QR Code Scanner</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Georgia', serif;
             text-align: center;
             padding: 20px;
-            background-color: #f3f3f3;
+            background-color: #f9f5f0;
         }
 
         h1 {
             margin-bottom: 20px;
+            color: #6A3F47;
         }
 
         #qr-video {
@@ -24,15 +25,25 @@
             margin-bottom: 20px;
         }
 
-        #status {
-            margin-top: 10px;
-            font-size: 1.2em;
-            color: #555;
+        .input-group {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            font-size: 1rem;
+            padding: 10px;
+            width: 300px;
+            border: 2px solid #6A3F47;
+            border-radius: 5px;
         }
 
         button {
             padding: 10px 20px;
-            font-size: 1em;
+            font-size: 1rem;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -42,6 +53,12 @@
 
         button:hover {
             background-color: #45a049;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #6A3F47;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
@@ -63,35 +80,38 @@
        onmouseout="this.style.backgroundColor='#6A3F47'">
        ← Back to Previous Page
     </a>
-    
-    <h1>Add Card</h1>
+
+    <h1>QR Code Scanner</h1>
     <video id="qr-video" autoplay></video>
+    <div class="input-group">
+        <input type="text" id="url-input" placeholder="Scanned URL will appear here">
+        <button id="go-button">Go to URL</button>
+    </div>
     <div id="status">Point your camera at a QR code</div>
-    <button id="stop-button" style="display: none;">Stop Scanning</button>
 
     <script>
         const video = document.getElementById("qr-video");
+        const urlInput = document.getElementById("url-input");
+        const goButton = document.getElementById("go-button");
         const statusDiv = document.getElementById("status");
-        const stopButton = document.getElementById("stop-button");
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
 
         let scanning = true;
 
-        // Function to start the video stream
+        // Start the video stream
         async function startVideo() {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
                 video.srcObject = stream;
                 scanning = true;
-                stopButton.style.display = "block";
             } catch (err) {
                 console.error("Error accessing the camera:", err);
                 statusDiv.textContent = "Unable to access the camera. Please check your permissions.";
             }
         }
 
-        // Function to scan QR codes from the video feed
+        // QR Code scanning function
         function scanQRCode() {
             if (!scanning) return;
 
@@ -110,40 +130,42 @@
 
             if (qrCode) {
                 console.log("QR Code Data:", qrCode.data);
-                stopVideo(); // Stop the video stream
-        
-                // Navigate to the URL embedded in the QR code
-                if (isValidUrl(qrCode.data)) {
-                    window.location.href = qrCode.data;
-                } else {
-                    alert(`Scanned data is not a valid URL: ${qrCode.data}`);
-                }
+
+                // Populate the text box with the scanned URL
+                urlInput.value = qrCode.data;
+                statusDiv.textContent = "QR Code detected. URL updated.";
             } else {
                 statusDiv.textContent = "Scanning for QR codes...";
-                requestAnimationFrame(scanQRCode); // Continue scanning
+            }
+
+            // Keep scanning
+            requestAnimationFrame(scanQRCode);
+        }
+
+        // Navigate to the URL on button click
+        goButton.addEventListener("click", () => {
+            const url = urlInput.value;
+            if (isValidUrl(url)) {
+                window.location.href = url;
+            } else {
+                alert("The entered text is not a valid URL.");
+            }
+        });
+
+        // Validate URLs
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch {
+                return false;
             }
         }
 
-        // Function to stop the video stream
-        function stopVideo() {
-            const stream = video.srcObject;
-            if (stream) {
-                const tracks = stream.getTracks();
-                tracks.forEach(track => track.stop());
-                video.srcObject = null;
-            }
-            scanning = false;
-            stopButton.style.display = "none";
-            statusDiv.textContent = "Scanning stopped.";
-        }
-
-        // Start scanning on video loaded
+        // Start scanning when the video feed is ready
         video.addEventListener("loadeddata", scanQRCode);
 
-        // Stop scanning on button click
-        stopButton.addEventListener("click", stopVideo);
-
-        // Start the camera when the page loads
+        // Start the video stream on page load
         startVideo();
     </script>
 </body>
