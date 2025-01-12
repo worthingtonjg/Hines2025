@@ -225,8 +225,7 @@
                 .find(item => item.toLowerCase() === name.toLowerCase());
         
             if (!validName) {
-                alert(`Invalid card name: "${name}".`);
-                return; // Exit if the name is not valid
+                return false; // Exit if the name is not valid
             }
         
             // Set the name to the exact match from the data
@@ -238,10 +237,9 @@
             );
             if (existingCard) {
                 if(select === true) {
-                    alert('You already have that card.');
                     window.location.href='hand';
                 }
-                return;
+                return false;
             }
         
             const cardContainer = document.createElement('div');
