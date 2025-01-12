@@ -100,7 +100,7 @@
 
         .card.fullscreen {
             position: fixed;
-            top: 50px; /* 50 pixels from the top */
+            top: 100px; /* 50 pixels from the top */
             left: 50%;
             transform: translate(-50%, 0) scale(2); /* Remove vertical adjustment */
             z-index: 1000;
@@ -212,9 +212,9 @@
         const emptyHandMessage = document.getElementById('empty-hand-message');
 
         function checkHandEmpty() {
-            // Check if there are any card containers in the hand div
+            // Check if there are any actual card containers (excluding the empty-hand message)
             const hasCards = Array.from(handDiv.children).some(
-                child => !child.classList.contains('hidden') && child !== emptyHandMessage
+                child => child.classList.contains('card-container') // Only consider card containers
             );
 
             if (!hasCards) {
