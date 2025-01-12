@@ -16,7 +16,7 @@
             align-items: center;
             gap: 20px;
             min-height: 100vh;
-            background-image: url('background.png');
+            background-image: url('/background.png');
             background-repeat: repeat;
             background-size: auto;
             background-position: top left;
@@ -46,9 +46,11 @@
         }
 
         .qr-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
+            display: flex;
+            flex-wrap: wrap; /* Allows items to wrap to the next row */
+            gap: 20px; /* Adds spacing between items */
+            justify-content: center; /* Centers the items in the container */
+            width: 100%;
         }
 
         .qr-item {
