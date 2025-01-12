@@ -191,16 +191,6 @@
 </head>
 <body>
     <div class="controls">
-        <select id="category">
-            <option value="weapons">Weapons</option>
-            <option value="suspects">Suspects</option>
-            <option value="rooms">Rooms</option>
-        </select>
-
-        <select id="items">
-            <!-- Options will be dynamically populated -->
-        </select>
-
         <button id="add-card">Add Card</button>
     </div>
 
@@ -213,21 +203,8 @@
             rooms: ['Eagles Nest','Kitty Hines','Seaside Retreat','Secret Garden','Library','Lodge','Victorian Rose','Winter Dreams']
         };
 
-        const categorySelect = document.getElementById('category');
-        const itemsSelect = document.getElementById('items');
         const handDiv = document.getElementById('hand');
         const addCardButton = document.getElementById('add-card');
-
-        function updateItems() {
-            const category = categorySelect.value;
-            itemsSelect.innerHTML = '';
-            data[category].forEach(item => {
-                const option = document.createElement('option');
-                option.value = item;
-                option.textContent = item;
-                itemsSelect.appendChild(option);
-            });
-        }
 
         function loadHand() {
             const storedHand = JSON.parse(localStorage.getItem('playerHand')) || [];
@@ -351,8 +328,6 @@
             return urlParams.get(param);
         }
 
-        categorySelect.addEventListener('change', updateItems);
-
         addCardButton.addEventListener('click', () => {
             window.location.href = 'cardadd';
         });
@@ -363,15 +338,6 @@
             if (fullscreenCard) {
                 toggleFullscreen(fullscreenCard, false);
             }
-//                fullscreenCard.classList.remove('fullscreen');
-//                const image = fullscreenCard.querySelector('.card-image');
-//                const qrCode = fullscreenCard.querySelector('.card-qr');
-//                image.classList.remove('hidden');
-//                qrCode.classList.add('hidden');
-//                label.classList.remove('hidden');
-//            }
-//            overlay.classList.remove('active');
-//            Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
         });
         
         window.addEventListener('DOMContentLoaded', () => {
@@ -383,12 +349,8 @@
             if (cardName) {
                 addCardToHand(cardName, true); // Add and select the card
             }
-        
-            // Initialize dropdown items
-            updateItems();
         });
 
-        updateItems();
         loadHand();
     </script>
 </body>
