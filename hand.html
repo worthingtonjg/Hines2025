@@ -237,13 +237,10 @@
                 container => container.dataset.name === name
             );
             if (existingCard) {
-                
                 if(select === true) {
                     alert('You already have that card.');
+                    window.location.href='hand';
                 }
-                
-                const url = new URL(window.location.href);
-                url.searchParams.delete('card'); 
                 return;
             }
         
