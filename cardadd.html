@@ -25,6 +25,13 @@
             margin-bottom: 20px;
         }
 
+        .card-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #AF6A59;
+        }
+
         .input-group {
             margin: 20px auto;
             display: flex;
@@ -64,25 +71,9 @@
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 </head>
 <body>
-    <a href="hand" style="
-        display: inline-block;
-        padding: 10px 20px;
-        margin: 10px;
-        font-family: 'Georgia', serif;
-        font-size: 1rem;
-        color: #fff;
-        background-color: #6A3F47;
-        border-radius: 5px;
-        text-decoration: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s ease;
-    " onmouseover="this.style.backgroundColor='#AF6A59'"
-       onmouseout="this.style.backgroundColor='#6A3F47'">
-       ← Back to Previous Page
-    </a>
-
     <h1>QR Code Scanner</h1>
     <video id="qr-video" autoplay></video>
+    <div class="card-display" id="card-display">Card: None</div>
     <div class="input-group">
         <input type="text" id="url-input" placeholder="Scanned URL will appear here">
         <button id="go-button">Go to URL</button>
@@ -91,6 +82,7 @@
 
     <script>
         const video = document.getElementById("qr-video");
+        const cardDisplay = document.getElementById("card-display");
         const urlInput = document.getElementById("url-input");
         const goButton = document.getElementById("go-button");
         const statusDiv = document.getElementById("status");
@@ -108,6 +100,16 @@
             } catch (err) {
                 console.error("Error accessing the camera:", err);
                 statusDiv.textContent = "Unable to access the camera. Please check your permissions.";
+            }
+        }
+
+        // Extract the "card" query parameter from a URL
+        function getCardFromUrl(url) {
+            try {
+                const parsedUrl = new URL(url);
+                return parsedUrl.searchParams.get("card");
+            } catch {
+                return null; // Return null if the URL is invalid or doesn't contain the parameter
             }
         }
 
@@ -131,8 +133,12 @@
             if (qrCode) {
                 console.log("QR Code Data:", qrCode.data);
 
-                // Populate the text box with the scanned URL
+                // Update the text box with the scanned URL
                 urlInput.value = qrCode.data;
+
+                // Extract the card value and display it
+                const card = getCardFromUrl(qrCode.data);
+                cardDisplay.textContent = `Card: ${card || "None"}`;
                 statusDiv.textContent = "QR Code detected. URL updated.";
             } else {
                 statusDiv.textContent = "Scanning for QR codes...";
