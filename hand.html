@@ -238,7 +238,8 @@
             );
             if (select === true && existingCard) {
                 alert('You already have that card.');
-                window.location.href = 'hand';
+                const url = new URL(window.location.href);
+                url.searchParams.delete('card'); 
                 return;
             }
         
