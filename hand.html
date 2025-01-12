@@ -189,7 +189,7 @@
             background-color: #555;
         }
 
-        #add-card {
+        .control {
             display: inline-block;
             padding: 10px 20px;
             margin: 10px;
@@ -212,41 +212,17 @@
 </head>
 <body>
     <div class="controls">
-        <a href="index" style="
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #6A3F47;
-            border-radius: 5px;
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        " onmouseover="this.style.backgroundColor='#AF6A59'"
+        <a href="index" class="control" onmouseover="this.style.backgroundColor='#AF6A59'"
         onmouseout="this.style.backgroundColor='#6A3F47'">
         Home
         </a>
         
-        <a href="cluesheet" style="
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #6A3F47;
-            border-radius: 5px;
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        " onmouseover="this.style.backgroundColor='#AF6A59'"
+        <a href="cluesheet"  class="control" onmouseover="this.style.backgroundColor='#AF6A59'"
         onmouseout="this.style.backgroundColor='#6A3F47'">
         View Clue Sheet
         </a>
         
-        <button id="add-card">Add Card</button>
+        <button id="add-card" class="control">Add Card</button>
     </div>
 
     <div class="hand" id="hand">
