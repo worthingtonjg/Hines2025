@@ -208,7 +208,7 @@
 
         function loadHand() {
             const storedHand = JSON.parse(localStorage.getItem('playerHand')) || [];
-            storedHand.forEach(item => addCardToHand(item));
+            storedHand.forEach(item => addCardToHand(item, false));
         }
 
         function saveHand() {
@@ -216,7 +216,7 @@
             localStorage.setItem('playerHand', JSON.stringify(cards));
         }
 
-        function addCardToHand(name, select = false) {
+        function addCardToHand(name, select) {
             if (!name) return; // Exit if name is invalid
 
             // Find the card name in the data (case-insensitive)
