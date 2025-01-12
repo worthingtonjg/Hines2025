@@ -236,7 +236,7 @@
             const existingCard = Array.from(handDiv.children).find(
                 container => container.dataset.name === name
             );
-            if (existingCard) {
+            if (select && existingCard) {
                 alert('You already have that card.');
                 window.location.href = 'hand';
                 return;
