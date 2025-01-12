@@ -41,9 +41,16 @@
             margin-bottom: 10px;
         }
 
+        .clues-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
         ul {
             list-style-type: none;
             padding: 0;
+            width: 48%;
         }
 
         li {
@@ -55,13 +62,13 @@
         }
 
         .collected {
-            color: green;
+            color: red;
             font-weight: bold;
             text-decoration: line-through;
         }
 
         .not-collected {
-            color: red;
+            color: black;
         }
 
         .status-icon {
@@ -72,11 +79,11 @@
         }
 
         .status-icon.collected {
-            background-color: green;
+            background-color: red;
         }
 
         .status-icon.not-collected {
-            background-color: red;
+            background-color: black;
         }
     </style>
 </head>
@@ -85,17 +92,26 @@
 
     <div class="clue-category" id="weapons">
         <h2>Weapons</h2>
-        <ul></ul>
+        <div class="clues-container">
+            <ul></ul>
+            <ul></ul>
+        </div>
     </div>
 
     <div class="clue-category" id="suspects">
         <h2>Suspects</h2>
-        <ul></ul>
+        <div class="clues-container">
+            <ul></ul>
+            <ul></ul>
+        </div>
     </div>
 
     <div class="clue-category" id="rooms">
         <h2>Rooms</h2>
-        <ul></ul>
+        <div class="clues-container">
+            <ul></ul>
+            <ul></ul>
+        </div>
     </div>
 
     <script>
@@ -108,8 +124,8 @@
         const collectedClues = JSON.parse(localStorage.getItem('playerHand')) || [];
 
         function populateClues(category, clues) {
-            const list = document.querySelector(`#${category} ul`);
-            clues.forEach(clue => {
+            const columns = document.querySelectorAll(`#${category} ul`);
+            clues.forEach((clue, index) => {
                 const listItem = document.createElement('li');
                 const isCollected = collectedClues.includes(clue);
 
@@ -118,7 +134,7 @@
                     <span class="${isCollected ? 'collected' : 'not-collected'}">${clue}</span>
                 `;
 
-                list.appendChild(listItem);
+                columns[index % 2].appendChild(listItem);
             });
         }
 
