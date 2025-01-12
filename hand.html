@@ -194,7 +194,11 @@
         <button id="add-card">Add Card</button>
     </div>
 
-    <div class="hand" id="hand">Hand Empty - Find some clues!</div>
+    <div class="hand" id="hand">
+        <div id="empty-hand-message" class="hidden">
+            Hand is empty - go find some clues!
+        </div>
+    </div>
 
     <script>
         const data = {
@@ -205,15 +209,31 @@
 
         const handDiv = document.getElementById('hand');
         const addCardButton = document.getElementById('add-card');
+        const emptyHandMessage = document.getElementById('empty-hand-message');
+
+        function checkHandEmpty() {
+            // Check if there are any card containers in the hand div
+            const hasCards = Array.from(handDiv.children).some(
+                child => !child.classList.contains('hidden') && child !== emptyHandMessage
+            );
+
+            if (!hasCards) {
+                emptyHandMessage.classList.remove('hidden'); // Show the empty hand message
+            } else {
+                emptyHandMessage.classList.add('hidden'); // Hide the empty hand message
+            }
+        }
 
         function loadHand() {
             const storedHand = JSON.parse(localStorage.getItem('playerHand')) || [];
             storedHand.forEach(item => addCardToHand(item, false));
+            checkHandEmpty();
         }
 
         function saveHand() {
             const cards = Array.from(handDiv.children).map(container => container.dataset.name);
             localStorage.setItem('playerHand', JSON.stringify(cards));
+            checkHandEmpty();
         }
 
         function addCardToHand(name, select) {
