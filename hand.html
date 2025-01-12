@@ -100,9 +100,9 @@
 
         .card.fullscreen {
             position: fixed;
-            top: 50; 
+            top: 50px; /* 50 pixels from the top */
             left: 50%;
-            transform: translate(-50%, 50) scale(2); /* Match the change in `top` */
+            transform: translate(-50%, 0) scale(2); /* Remove vertical adjustment */
             z-index: 1000;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
