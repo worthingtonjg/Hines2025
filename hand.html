@@ -297,7 +297,7 @@
             handDiv.appendChild(cardContainer);
         
             if (select) {
-                toggleFullscreen(card);
+                toggleFullscreen(card, select);
             }
         
             saveHand();
@@ -308,7 +308,7 @@
         overlay.className = 'overlay';
         document.body.appendChild(overlay);
         
-        function toggleFullscreen(card) {
+        function toggleFullscreen(card, select) {
             const isFullscreen = card.classList.contains('fullscreen');
             const image = card.querySelector('.card-image');
             const qrCode = card.querySelector('.card-qr');
@@ -323,12 +323,16 @@
                         container.classList.add('hidden');
                     }
                 });
-            } else if (!image.classList.contains('hidden')) {
-                // Toggle to QR code
-                image.classList.add('hidden');
-                qrCode.classList.remove('hidden');
-                label.classList.add('hidden');
-            } else {
+
+                if(select === true) {
+                    // Toggle to QR code
+                    image.classList.add('hidden');
+                    qrCode.classList.remove('hidden');
+                    label.classList.add('hidden');
+                }
+    
+            } 
+            else {
                 // Reset the images
                 image.classList.remove('hidden');
                 qrCode.classList.add('hidden');
