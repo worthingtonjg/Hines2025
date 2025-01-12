@@ -358,9 +358,11 @@
         });
 
         // Handle overlay click to deselect the card
-//        overlay.addEventListener('click', () => {
-//            const fullscreenCard = document.querySelector('.card.fullscreen');
-//            if (fullscreenCard) {
+        overlay.addEventListener('click', () => {
+            const fullscreenCard = document.querySelector('.card.fullscreen');
+            if (fullscreenCard) {
+                toggleFullscreen(card);
+            }
 //                fullscreenCard.classList.remove('fullscreen');
 //                const image = fullscreenCard.querySelector('.card-image');
 //                const qrCode = fullscreenCard.querySelector('.card-qr');
@@ -370,7 +372,7 @@
 //            }
 //            overlay.classList.remove('active');
 //            Array.from(handDiv.children).forEach(container => container.classList.remove('hidden'));
-//        });
+        });
         
         window.addEventListener('DOMContentLoaded', () => {
             // Load saved cards
