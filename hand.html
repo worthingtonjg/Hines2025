@@ -263,7 +263,7 @@
                 if(select)
                 {
                     const cardElement = existingCard.querySelector('.card');
-                    toggleFullscreen(cardElement);
+                    toggleFullscreen(cardElement, true);
                 }
                 return;
             }
@@ -282,7 +282,7 @@
                 <div class="card-label">${name}</div>
             `;
         
-            card.addEventListener('click', () => toggleFullscreen(card));
+            card.addEventListener('click', () => toggleFullscreen(card, false));
         
             const removeButton = document.createElement('button');
             removeButton.className = 'remove-button';
@@ -361,7 +361,7 @@
         overlay.addEventListener('click', () => {
             const fullscreenCard = document.querySelector('.card.fullscreen');
             if (fullscreenCard) {
-                toggleFullscreen(card);
+                toggleFullscreen(fullscreenCard, false);
             }
 //                fullscreenCard.classList.remove('fullscreen');
 //                const image = fullscreenCard.querySelector('.card-image');
