@@ -236,8 +236,12 @@
             const existingCard = Array.from(handDiv.children).find(
                 container => container.dataset.name === name
             );
-            if (select === true && existingCard) {
-                alert('You already have that card.');
+            if (existingCard) {
+                
+                if(select === true) {
+                    alert('You already have that card.');
+                }
+                
                 const url = new URL(window.location.href);
                 url.searchParams.delete('card'); 
                 return;
