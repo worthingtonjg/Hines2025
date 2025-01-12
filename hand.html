@@ -237,11 +237,7 @@
                 container => container.dataset.name === name
             );
             if (existingCard) {
-                if(select)
-                {
-                    const cardElement = existingCard.querySelector('.card');
-                    toggleFullscreen(cardElement, true);
-                }
+                alert('You already have that card.');
                 return;
             }
         
