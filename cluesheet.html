@@ -113,12 +113,14 @@
             list-style-type: none; /* Removes bullet points */
             padding: 0;
             margin: 0;
+            width: 100%; /* Ensures the list spans the full width */
         }
 
         #motives .motive-item {
             margin-bottom: 20px; /* Adds spacing between motives */
             font-size: 1rem;
             line-height: 1.5;
+            display: block; /* Ensures each motive spans the full width */
         }
 
         #motives .motive-item strong {
@@ -131,6 +133,7 @@
         #motives .motive-item p {
             margin: 0;
             color: #333;
+            word-wrap: break-word; /* Ensures long text wraps within the container */
         }
 
         .clues-container ul li a {
