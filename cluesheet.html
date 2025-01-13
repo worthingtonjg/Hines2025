@@ -109,6 +109,31 @@
             text-decoration: line-through;
         }
 
+        #motives .motives-list {
+            list-style-type: none; /* Removes bullet points */
+            padding: 0;
+            margin: 0;
+        }
+
+        #motives .motive-item {
+            margin-bottom: 20px; /* Adds spacing between motives */
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        #motives .motive-item strong {
+            font-size: 1.1rem;
+            color: #AF6A59;
+            display: block; /* Ensures the name is on its own line */
+            margin-bottom: 5px;
+        }
+
+        #motives .motive-item p {
+            margin: 0;
+            color: #333;
+        }
+
+
     </style>
 </head>
 <body>
@@ -156,8 +181,8 @@
     </div>
 
     <div class="clue-category" id="motives">
-        <h2>Motives Collected</h2>
-        <ul></ul>
+        <h2>Motives Discovered</h2>
+        <ul class="motives-list"></ul>
     </div>
 
     <div class="clue-category" id="pregame">
@@ -209,13 +234,16 @@
         }
 
         function populateMotives() {
-            const motivesContainer = document.querySelector('#motives ul');
+            const motivesContainer = document.querySelector('#motives .motives-list');
             const motives = JSON.parse(localStorage.getItem('motives')) || [];
 
             motives.forEach(motive => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `
-                    <strong>${motive.character}</strong>: ${motive.motive}
+                    <div class="motive-item">
+                        <strong>${motive.character}</strong>
+                        <p>${motive.motive}</p>
+                    </div>
                 `;
                 motivesContainer.appendChild(listItem);
             });
