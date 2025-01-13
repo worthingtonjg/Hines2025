@@ -85,6 +85,30 @@
         .status-icon.not-collected {
             background-color: black;
         }
+
+        .clues-container ul li {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between the icon and text */
+            padding: 5px 0; /* Space between list items */
+        }
+
+        .clue-link {
+            font-size: 1rem;
+            text-decoration: none;
+            color: inherit; /* Inherits the parent color */
+        }
+
+        .clue-link.not-collected {
+            color: black;
+        }
+
+        .clue-link.collected {
+            color: red;
+            font-weight: bold;
+            text-decoration: line-through;
+        }
+
     </style>
 </head>
 <body>
@@ -140,11 +164,23 @@
         <h2>Pre-game Clues Collected</h2>
         <div class="clues-container">
             <ul>
-                <li><a href='characters'><span class="status-icon not-collected">Character and Room Assignments</span></a></li>
-                <li><a href="obituary"><span class="status-icon not-collected">Hines Obituary</span></a></li>
-                <li><a href="letter"><span class="status-icon not-collected">Inspector Noir's Letter</span></a></li>
-                <li><a href="dialog"><span class="status-icon not-collected">Pregame Dialog</span></a></li>
-            </ul>            
+                <li>
+                    <span class="status-icon not-collected"></span>
+                    <a href="characters" class="clue-link not-collected">Character and Room Assignments</a>
+                </li>
+                <li>
+                    <span class="status-icon not-collected"></span>
+                    <a href="obituary" class="clue-link not-collected">Hines Obituary</a>
+                </li>
+                <li>
+                    <span class="status-icon not-collected"></span>
+                    <a href="letter" class="clue-link not-collected">Inspector Noir's Letter</a>
+                </li>
+                <li>
+                    <span class="status-icon not-collected"></span>
+                    <a href="dialog" class="clue-link not-collected">Pregame Dialog</a>
+                </li>
+            </ul>
         </div>
     </div>
 
