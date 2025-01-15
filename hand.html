@@ -208,7 +208,7 @@
         #add-card:hover {
             background-color: #AF6A59;
         }
-        
+
         .filter {
             display: flex;
             align-items: center;
@@ -225,7 +225,6 @@
             font-size: 1rem;
             color: #333;
         }
-        
     </style>
 </head>
 <body>
@@ -325,13 +324,13 @@
         
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `
+            card.innerHTML = 
                 <img class="card-image" src="cards/${name.toLowerCase().replace(/ /g, '')}.jpg" alt="${name}">
                 <div class="card-qr hidden">
                     <img class="qr-image" src="codes/${name.toLowerCase().replace(/ /g, '')}.png" alt="${name} QR Code">
                 </div>
                 <div class="card-label">${name}</div>
-            `;
+            ;
         
             card.addEventListener('click', () => toggleFullscreen(card, false));
         
@@ -409,33 +408,6 @@
         });
 
         const filterOptions = document.getElementById('filter-options');
-
-        filterOptions.addEventListener('change', () => {
-            const filter = filterOptions.value; // Get selected filter value
-            applyFilter(filter);
-        });
-        
-        function applyFilter(category) {
-            const allCards = Array.from(handDiv.children).filter(child => 
-                child.classList.contains('card-container')
-            );
-        
-            allCards.forEach(container => {
-                const cardName = container.dataset.name;
-                const isMatch = 
-                    category === 'all' || 
-                    data[category]?.includes(cardName);
-                
-                container.style.display = isMatch ? 'flex' : 'none';
-            });
-        }
-        
-        // Ensure filtering is applied when the page loads
-        window.addEventListener('DOMContentLoaded', () => {
-            loadHand();
-            applyFilter('all');
-        });
-        const filterOptions = document.getElementById('filter-options');
         
         filterOptions.addEventListener('change', () => {
             const filter = filterOptions.value; // Get selected filter value
@@ -462,7 +434,7 @@
             loadHand();
             applyFilter('all');
         });
-
+        
 
         // Handle overlay click to deselect the card
         overlay.addEventListener('click', () => {
