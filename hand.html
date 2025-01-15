@@ -223,6 +223,13 @@
         </a>
         
         <button id="add-card" class="control">Add Card</button>
+
+        <select id="filter-options">
+            <option value="all">All</option>
+            <option value="weapons">Weapons</option>
+            <option value="suspects">Suspects</option>
+            <option value="rooms">Rooms</option>
+        </select>
     </div>
 
     <div class="hand" id="hand">
@@ -381,6 +388,62 @@
         addCardButton.addEventListener('click', () => {
             window.location.href = 'cardadd';
         });
+
+        const filterOptions = document.getElementById('filter-options');
+
+        filterOptions.addEventListener('change', () => {
+            const filter = filterOptions.value; // Get selected filter value
+            applyFilter(filter);
+        });
+        
+        function applyFilter(category) {
+            const allCards = Array.from(handDiv.children).filter(child => 
+                child.classList.contains('card-container')
+            );
+        
+            allCards.forEach(container => {
+                const cardName = container.dataset.name;
+                const isMatch = 
+                    category === 'all' || 
+                    data[category]?.includes(cardName);
+                
+                container.style.display = isMatch ? 'flex' : 'none';
+            });
+        }
+        
+        // Ensure filtering is applied when the page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            loadHand();
+            applyFilter('all');
+        });
+        const filterOptions = document.getElementById('filter-options');
+        
+        filterOptions.addEventListener('change', () => {
+            const filter = filterOptions.value; // Get selected filter value
+            applyFilter(filter);
+        });
+        
+        function applyFilter(category) {
+            const allCards = Array.from(handDiv.children).filter(child => 
+                child.classList.contains('card-container')
+            );
+        
+            allCards.forEach(container => {
+                const cardName = container.dataset.name;
+                const isMatch = 
+                    category === 'all' || 
+                    data[category]?.includes(cardName);
+                
+                container.style.display = isMatch ? 'flex' : 'none';
+            });
+        }
+        
+        // Ensure filtering is applied when the page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            loadHand();
+            applyFilter('all');
+        });
+
 
         // Handle overlay click to deselect the card
         overlay.addEventListener('click', () => {
