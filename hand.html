@@ -208,22 +208,41 @@
         #add-card:hover {
             background-color: #AF6A59;
         }
+        
+        .filter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            background-color: #f9f5f0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            color: #333;
+        }
+        
     </style>
 </head>
 <body>
     <div class="controls">
         <a href="index" class="control" onmouseover="this.style.backgroundColor='#AF6A59'"
         onmouseout="this.style.backgroundColor='#6A3F47'">
-        Home
+            Home
         </a>
-        
-        <a href="cluesheet"  class="control" onmouseover="this.style.backgroundColor='#AF6A59'"
+        <a href="cluesheet" class="control" onmouseover="this.style.backgroundColor='#AF6A59'"
         onmouseout="this.style.backgroundColor='#6A3F47'">
-        View Clue Sheet
+            View Clue Sheet
         </a>
-        
         <button id="add-card" class="control">Add Card</button>
-
+    </div>
+    
+    <div class="filter">
+        <label for="filter-options">Filter by:</label>
         <select id="filter-options">
             <option value="all">All</option>
             <option value="weapons">Weapons</option>
