@@ -324,12 +324,12 @@
         
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = 
+            card.innerHTML = `
                 <img class="card-image" src="cards/${name.toLowerCase().replace(/ /g, '')}.jpg" alt="${name}">
                 <div class="card-qr hidden">
                     <img class="qr-image" src="codes/${name.toLowerCase().replace(/ /g, '')}.png" alt="${name} QR Code">
                 </div>
-                <div class="card-label">${name}</div>
+                <div class="card-label">${name}</div>`
             ;
         
             card.addEventListener('click', () => toggleFullscreen(card, false));
