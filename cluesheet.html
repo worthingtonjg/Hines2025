@@ -95,12 +95,12 @@
 
         .clue-link {
             font-size: 1rem;
-            text-decoration: none;
+            text-decoration: underline;
             color: inherit; /* Inherits the parent color */
         }
 
         .clue-link.not-collected {
-            color: black;
+            color: blue;
         }
 
         .clue-link.collected {
@@ -200,7 +200,7 @@
     <div class="clue-category" id="pregame">
         <h2>Pre-game Clues Collected</h2>
         <div>
-            <ul>
+            <ol>
                 <li>
                     <span class="status-icon not-collected"></span>
                     <a href="characters" class="clue-link not-collected">Character and Room Assignments</a>
