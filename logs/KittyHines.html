@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitty Hines Guest Log</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f9f5f0;
+            color: #333;
+            margin: 0;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+
+            background-image: url('background.png');
+            background-repeat: repeat;
+            background-size: auto;
+            background-position: top left;
+        }
+
+        .guest-log {
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .guest-log h1 {
+            font-size: 2rem;
+            color: #6A3F47;
+            margin-bottom: 10px;
+        }
+
+        .guest-log h2 {
+            font-size: 1.5rem;
+            color: #AF6A59;
+            margin: 10px 0;
+        }
+
+        .guest-log p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .entry {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .entry:last-child {
+            border-bottom: none;
+        }
+
+        .entry-date {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .entry-details {
+            margin-top: 5px;
+            color: #555;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .guest-log {
+                padding: 15px;
+            }
+
+            .guest-log h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="guest-log">
+        <h1>Kitty Hines Guest Log</h1>
+        <h2>Recorded Entries</h2>
+
+        <div class="entry">
+            <p class="entry-date">January 15, 2025</p>
+            <p class="entry-details">"I woke to the faint scent of lavender and felt a presence in the room. At first, I thought it was my imagination, but the whispers... they sounded so real." – Jane Doe</p>
+        </div>
+
+        <div class="entry">
+            <p class="entry-date">December 10, 2024</p>
+            <p class="entry-details">"Late at night, I saw a flicker of candlelight through the curtains. I thought someone was playing a prank, but there was no one there." – John Smith</p>
+        </div>
+
+        <div class="entry">
+            <p class="entry-date">November 3, 2024</p>
+            <p class="entry-details">"The feeling of being watched was intense. I couldn’t shake it off, and then I heard a soft, melodious hum. It was unsettling yet beautiful." – Emily Carter</p>
+        </div>
+
+        <div class="entry">
+            <p class="entry-date">October 21, 2024</p>
+            <p class="entry-details">"I swear I heard someone walking around the room while I was in bed. The faint outline of a figure near the window gave me chills." – Sarah Lee</p>
+        </div>
+    </div>
+</body>
+</html>
