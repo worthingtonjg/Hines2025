@@ -24,10 +24,16 @@
 
         .controls {
             display: flex;
-            flex-direction: row;
-            gap: 10px;
-            text-align: center;
-            background-color: #f9f5f0;
+            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            justify-content: center; /* Centers the buttons */
+            gap: 0; /* Removes spacing between buttons */
+        }
+        
+        .control {
+            padding: 5px 10px; /* Reduces padding for smaller buttons */
+            font-size: 0.9rem; /* Adjusts font size for smaller text */
+            border-radius: 3px; /* Slightly less rounded corners */
+            margin: 0; /* Removes any margin between buttons */
         }
 
         select, button {
@@ -188,23 +194,7 @@
         .toggle-qr:hover {
             background-color: #555;
         }
-
-        .control {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #6A3F47;
-            border-radius: 5px;
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-            border: none; /* Removes the default button border */
-            cursor: pointer;
-        }
-        
+       
         #add-card:hover {
             background-color: #AF6A59;
         }
